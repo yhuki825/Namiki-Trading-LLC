@@ -1,0 +1,634 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<!--
+================================================================
+  合同会社 Namiki Trading ブランドサイト デザイン案（9/26 ハウススタイル版）
+  コンセプト：「一行ずつ、正しく通す」
+    商号は代表者さまのお名前と重なるため、社名からの着想は採用せず、事業内容（EC・家電ショップ向けと、
+    証券口座・株式取引向けのWEBシステム開発）だけからコンセプトを組み立てています。
+    商品情報も口座も取引も、システムの中では一行一行のデータです。その一行を正しく通すことが、
+    使いやすい買い物体験と、安心できる資産運用を支える——その姿勢を「行」と「カーソル」で表します。
+    ・ヒーロー：コードの写真が一行ずつ正しい位置に揃って描き出され、確認のカーソルが行を走るCanvas
+    ・右端のスクロールレール：表の行を、カーソルが一行ずつ下りていく（行番号の表示）
+    ※所在地・地名、代表者の氏名から着想した要素は採用していません。
+  デプロイ：Cloudflare Pages（Direct Upload）にこのファイルをそのままアップロード。
+            ビルド不要。外部依存は Google Fonts と Unsplash 画像のみ。
+  書体：Shippori Mincho B1 ＋ Zen Kaku Gothic New ＋ Jost ＋ IBM Plex Mono ／ 地色：深い青緑 #0B1A20 ／ アクセント：シアン #5BC8DC
+
+  ■ 公開前の確認事項（チェックリスト）
+  【確認事項】1. 社名からの着想は使っていません（代表者さまのお名前と重なるため）
+  【確認事項】2. キャッチコピー「使いやすさを、正確さの上に。」は案です
+  【確認事項】3. 「私たちについて」「開発で大切にしていること」「開発の進め方」の文章は、CSVの事業内容をもとにした案です
+  【確認事項】4. ヒーローとレールの行番号は装飾で、実在のシステムや数値ではありません
+  【確認事項】5. 証券向けシステムの記載は「システム開発の受託」であり、金融商品の取引・勧誘を行うものではない旨が伝わる表現にしています。表現をご確認ください
+  【確認事項】6. 開発実績・取引先・使用技術・体制（人数）はCSVにないため記載していません
+  【確認事項】7. 社名に「Trading」とありますが、CSVの事業内容どおりシステム開発の会社として構成しています
+  【確認事項】8. 英字の見出しは飾りの仮表記です
+  【確認事項】9. 代表者の役職名（合同会社＝「代表社員」と仮置き）
+  【確認事項】10. 代表メッセージは草案です。ご本人の確認・修正を経て公開してください
+  【確認事項】11. 設立・資本金・従業員数はCSVにないため会社概要ではコメントアウト
+  【確認事項】12. 画像はUnsplashのフリー素材（仮）。自社写真への差し替え推奨
+  [ ] OGP画像・favicon・公開URL
+  写真ID：1461749280684-dccba630e2f6（コード・ヒーローのCanvasで使用）／1556740758-90de374c12ad（店頭のタブレット）／
+          1557821552-17105176677c（ショッピングカート）／1611974789855-9c2a0a7236a3（株価チャート）
+================================================================
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>合同会社Namiki Trading｜EC・家電ショップ向け、証券向けのWEBシステム開発</title>
+<meta name="description" content="合同会社 Namiki Tradingは、ECショッピングサイトや家電販売店のWEBシステム、証券会社向けの口座管理・株式売買を支えるWEBシステムを開発する、IT・DXシステム開発の会社です。">
+<meta property="og:title" content="合同会社 Namiki Trading｜EC・家電ショップ向け、証券向けのWEBシステム開発">
+<meta property="og:description" content="合同会社 Namiki Tradingは、ECショッピングサイトや家電販売店のWEBシステム、証券会社向けの口座管理・株式売買を支えるWEBシステムを開発する、IT・DXシステム開発の会社です。">
+<meta property="og:type" content="website">
+<!-- 要確認：og:url / og:image は公開ドメイン確定後に設定 -->
+<meta name="theme-color" content="#0B1A20">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1A20'/%3E%3Cpath d='M6 9h20M6 14h20M6 19h20M6 24h20' stroke='%238FA4AA' stroke-width='1'/%3E%3Crect x='6' y='16' width='20' height='5' fill='%235BC8DC'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Shippori+Mincho+B1:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{--base:#0B1A20;--base-2:#112630;--deep:#08141A;--text:#E7F0F2;--mute:#8FA4AA;--accent:#5BC8DC;--line:rgba(231,240,242,.13);--paper:#E7EEF0;--ink:#0E1E25;--paper-line:rgba(14,30,37,.16);--paper-mute:#56676D;--header-bg:rgba(11,26,32,.88);--menu-bg:rgba(8,20,26,.97);--band-veil:rgba(8,20,26,.72);--shape:4px;--ph-fallback:linear-gradient(135deg,#112630,#0B1A20);--ph-pattern:repeating-linear-gradient(0deg,rgba(91,200,220,.16) 0 1px,transparent 1px 14px),linear-gradient(135deg,#112630,#0B1A20);--bullet-r:0;--serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;--sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;--latin:"Jost","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--header-h:72px}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--base);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.9;letter-spacing:.04em;word-break:auto-phrase;text-wrap:pretty;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,dl,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+.nw{display:inline-block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--accent);color:var(--base);padding:10px 16px;text-decoration:none;font-weight:700}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1160px,calc(100% - 48px));margin:0 auto}
+
+/* header */
+.header{position:fixed;inset:0 0 auto 0;z-index:100;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid transparent;transition:background .4s,backdrop-filter .4s,border-color .4s}
+.header.is-scrolled{background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line)}
+.header__in{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:24px;width:min(1240px,calc(100% - 40px));margin:0 auto}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.logo svg{width:30px;height:30px;flex:none}
+.logo__name{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.logo__name b{font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.12em;white-space:nowrap}
+.logo__name small{font-size:10.5px;letter-spacing:.18em;color:var(--mute);white-space:nowrap}
+.gnav ul{display:flex;gap:clamp(18px,2.2vw,30px)}
+.gnav a{position:relative;display:block;padding:6px 0;font-size:13.5px;letter-spacing:.13em;text-decoration:none}
+.gnav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.gnav a:hover::after,.gnav a:focus-visible::after{transform:scaleX(1)}
+.menu-btn{display:none;background:none;border:0;color:var(--text);width:44px;height:44px;cursor:pointer;position:relative;padding:0}
+.menu-btn span{position:absolute;left:11px;right:11px;height:1.5px;background:currentColor;transition:transform .3s,opacity .3s}
+.menu-btn span:nth-child(1){top:16px}.menu-btn span:nth-child(2){top:22px}.menu-btn span:nth-child(3){top:28px}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:900px){
+  :root{--header-h:64px}
+  .menu-btn{display:block;z-index:120}
+  .gnav{position:fixed;inset:0;background:var(--menu-bg);display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;z-index:110}
+  .gnav.is-open{opacity:1;visibility:visible}
+  .gnav ul{flex-direction:column;align-items:center;gap:26px}
+  .gnav a{font-family:var(--serif);font-size:20px;letter-spacing:.16em}
+}
+
+/* sections */
+.sec{position:relative;padding:clamp(96px,14vw,180px) 0}
+.sec--alt{background:var(--base-2)}
+.sec--deep{background:var(--deep)}
+.sec--paper{background:var(--paper);color:var(--ink);--line:var(--paper-line);--mute:var(--paper-mute);--text:var(--ink)}
+.sh{margin-bottom:clamp(40px,6vw,72px)}
+.sh__ja{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.8vw,36px);letter-spacing:.12em;line-height:1.55}
+.sh__en{font-family:var(--latin);color:var(--accent)}
+.sh__sub{margin-top:14px;color:var(--mute);font-size:14px;letter-spacing:.1em}
+.lead{font-family:var(--serif);font-size:clamp(20px,2.3vw,28px);line-height:1.8;letter-spacing:.1em}
+.prose p{max-width:34em}
+.prose p+p{margin-top:1.3em}
+
+/* concept */
+.concept{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(40px,7vw,110px);align-items:center}
+.concept .lead{margin-bottom:28px}
+.fig{width:100%;height:auto;display:block;overflow:visible}
+@media (max-width:900px){.concept{grid-template-columns:minmax(0,1fr)}}
+
+/* photo */
+.ph{position:relative;overflow:hidden;background:var(--ph-fallback)}
+.ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.03)}
+.ph.is-fallback{background:var(--ph-pattern)}
+
+/* band */
+.band{position:relative;height:clamp(280px,46vw,540px);overflow:hidden}
+.band .ph{position:absolute;inset:0}
+.band .ph img{position:absolute;left:0;top:-9%;height:118%;filter:saturate(.68) brightness(.7);will-change:transform}
+.band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--band-veil));pointer-events:none}
+.band__cap{position:absolute;left:0;right:0;bottom:clamp(28px,5vw,56px);z-index:2}
+.band__cap p{font-family:var(--serif);font-size:clamp(19px,2.4vw,30px);letter-spacing:.16em;line-height:1.7;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+
+/* business rows */
+.biz{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:center;position:relative}
+.biz+.biz{margin-top:clamp(72px,10vw,128px)}
+.biz:nth-of-type(even) .biz__media{order:2}
+.biz__media .ph{aspect-ratio:4/3;border-radius:var(--shape)}
+.biz__media .ph img{transition:transform 1.4s cubic-bezier(.22,.7,.2,1)}
+.biz:hover .biz__media .ph img{transform:scale(1.035)}
+.biz__kind{font-size:13.5px;letter-spacing:.16em;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.biz__kind em{font-family:var(--latin);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--mute)}
+.biz h3{font-family:var(--serif);font-weight:600;font-size:clamp(22px,2.4vw,30px);letter-spacing:.12em;line-height:1.6;margin-bottom:18px}
+.biz p{max-width:30em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags li{border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:12.5px;letter-spacing:.08em;color:var(--mute)}
+.rule-list{margin-top:22px;border-top:1px solid var(--line)}
+.rule-list li{position:relative;padding:12px 0 12px 1.5em;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.7}
+.rule-list li::before{content:"";position:absolute;left:0;top:1.25em;width:7px;height:7px;background:var(--accent);border-radius:var(--bullet-r,50%)}
+@media (max-width:900px){.biz{grid-template-columns:minmax(0,1fr)}.biz:nth-of-type(even) .biz__media{order:0}}
+
+/* steps (actual order -> numbered) */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:11px;height:1px;background:var(--line)}
+.steps::after{content:"";position:absolute;left:0;top:11px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 2.4s cubic-bezier(.6,.1,.2,1)}
+.steps.is-in::after{transform:scaleX(1)}
+.step{position:relative;padding-top:44px}
+.step__dot{position:absolute;left:0;top:0;width:23px;height:23px;border-radius:var(--dot-r,50%);border:1px solid var(--mute);background:var(--step-bg,var(--base));display:grid;place-items:center}
+.step__dot::after{content:"";width:11px;height:11px;border-radius:var(--dot-r,50%);background:var(--accent);transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.steps.is-in .step__dot::after{transform:scale(1)}
+.steps.is-in .step:nth-child(2) .step__dot::after{transition-delay:.6s}
+.steps.is-in .step:nth-child(3) .step__dot::after{transition-delay:1.2s}
+.steps.is-in .step:nth-child(4) .step__dot::after{transition-delay:1.8s}
+.step__no{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+.step h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.14em;margin:6px 0 10px}
+.step p{font-size:14.5px;line-height:1.85;color:var(--mute)}
+.loop-note{margin-top:40px;display:flex;align-items:center;gap:12px;color:var(--mute);font-size:14px;letter-spacing:.1em}
+.loop-note svg{width:22px;height:22px;fill:none;stroke:var(--accent);stroke-width:1.4}
+@media (max-width:900px){
+  .steps{grid-template-columns:minmax(0,1fr);gap:0;padding-left:40px}
+  .steps::before,.steps::after{left:11px;right:auto;top:10px;bottom:10px;width:1px;height:auto}
+  .steps::after{transform:scaleY(0);transform-origin:top}
+  .steps.is-in::after{transform:scaleY(1)}
+  .step{padding:0 0 36px}
+  .step__dot{left:-40px}
+}
+
+/* values */
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.value{padding:36px clamp(20px,3vw,40px) 40px;border-right:1px solid var(--line)}
+.value:first-child{padding-left:0}.value:last-child{border-right:0;padding-right:0}
+.value__mark{font-family:var(--latin);color:var(--accent);font-size:15px;letter-spacing:.12em;margin-bottom:14px;display:block}
+.value h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.14em;margin-bottom:12px;line-height:1.6}
+.value p{font-size:14.5px;color:var(--mute);line-height:1.9}
+@media (max-width:900px){.values{grid-template-columns:minmax(0,1fr)}.value{padding:28px 0;border-right:0;border-bottom:1px solid var(--line)}}
+
+/* message (vertical on desktop) */
+.msg{display:flex;flex-direction:row-reverse;gap:clamp(40px,6vw,90px);justify-content:center;align-items:flex-start}
+.msg__title{writing-mode:vertical-rl;font-family:var(--serif);font-weight:600;font-size:clamp(28px,3vw,40px);letter-spacing:.2em;line-height:1.7;flex:none}
+.msg__body{writing-mode:vertical-rl;font-family:var(--serif);font-size:16px;line-height:2.3;letter-spacing:.14em;height:30em;max-width:100%;overflow-x:auto;display:flex;flex-direction:column}
+.msg__body p{margin:0 0 0 1.6em}
+.msg__body p.first{font-size:1.3rem}
+.msg__sign{margin-top:auto;text-align:end}
+.msg__sign small{display:block;font-size:13px;color:var(--mute);letter-spacing:.2em}
+@media (max-width:860px){
+  .msg{flex-direction:column;gap:32px}
+  .msg__title,.msg__body{writing-mode:horizontal-tb;height:auto}
+  .msg__body{line-height:2.1;letter-spacing:.06em;overflow:visible}
+  .msg__body p{margin:0 0 1.4em}
+  .msg__sign{text-align:right}
+}
+
+/* company */
+.company{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(40px,7vw,110px);align-items:start}
+.profile{margin:0;border-top:1px solid var(--line)}
+.profile>div{display:grid;grid-template-columns:9em minmax(0,1fr);gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
+.profile dt{color:var(--mute);font-size:14px;letter-spacing:.14em}
+.profile dd{margin:0;overflow-wrap:anywhere}
+.profile dd li{position:relative;padding-left:1.2em}
+.profile dd li+li{margin-top:4px}
+.profile dd li::before{content:"";position:absolute;left:0;top:.8em;width:6px;height:6px;background:var(--accent);border-radius:var(--bullet-r,50%)}
+@media (max-width:900px){.company{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.profile>div{grid-template-columns:minmax(0,1fr);gap:4px}}
+
+/* footer */
+.footer{border-top:1px solid var(--line);padding:72px 0 calc(40px + env(safe-area-inset-bottom,0px));background:var(--deep)}
+.footer__in{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px}
+.footer__tag{font-family:var(--serif);font-size:clamp(16px,1.8vw,22px);letter-spacing:.18em;margin-top:18px}
+.footer nav ul{display:flex;flex-wrap:wrap;gap:10px 24px}
+.footer nav a{font-size:12.5px;color:var(--mute);text-decoration:none;letter-spacing:.12em;transition:color .3s}
+.footer nav a:hover{color:var(--text)}
+.copy{margin-top:40px;font-family:var(--latin);font-size:13px;color:var(--mute);letter-spacing:.08em}
+
+/* reveal (only hidden when JS runs) */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity 1.05s cubic-bezier(.22,.7,.2,1),transform 1.05s cubic-bezier(.22,.7,.2,1)}
+.js .rv.is-in{opacity:1;transform:none}
+.js .steps .step{opacity:0;transition:opacity .9s cubic-bezier(.22,.7,.2,1)}
+.js .steps.is-in .step{opacity:1}
+.js .steps.is-in .step:nth-child(2){transition-delay:.4s}
+.js .steps.is-in .step:nth-child(3){transition-delay:.8s}
+.js .steps.is-in .step:nth-child(4){transition-delay:1.2s}
+/* self-drawing SVG */
+.fig .ln{fill:none;stroke:var(--accent);stroke-width:1.3;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s cubic-bezier(.45,.05,.2,1) .3s}
+.fig .ln2{fill:none;stroke:var(--mute);stroke-width:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s cubic-bezier(.45,.05,.2,1) .9s}
+.fig .dot{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .8s 1.2s,transform .8s cubic-bezier(.3,1.6,.5,1) 1.2s}
+.fig .lbl{opacity:0;transition:opacity 1s 1.8s;font-family:var(--sans);font-size:13px;letter-spacing:.12em;fill:var(--text)}
+.fig .lbl.en{font-family:var(--latin);fill:var(--accent);font-size:13px}
+.fig.is-in .ln,.fig.is-in .ln2{stroke-dashoffset:0}
+.fig.is-in .dot{opacity:1;transform:none}
+.fig.is-in .lbl{opacity:1}
+
+/* scroll cue */
+.cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--latin);font-size:11px;letter-spacing:.3em;color:var(--mute);z-index:3}
+.cue i{display:block;width:1px;height:44px;background:linear-gradient(var(--mute),transparent);animation:cue 2.4s ease-in-out infinite}
+@media (max-width:900px){.cue{display:none}}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* hero entrance (class toggle after first frame) */
+.hero [data-in]{opacity:0;transform:translateY(14px);transition:opacity 1.1s ease,transform 1.1s ease}
+.hero h1 [data-in]{transform:translateY(-14px)}
+.is-loaded .hero [data-in]{opacity:1;transform:none}
+.is-loaded .hero [data-in="2"]{transition-delay:.4s}
+.is-loaded .hero [data-in="3"]{transition-delay:.9s}
+.is-loaded .hero [data-in="4"]{transition-delay:1.3s}
+
+/* rail base */
+.rail{position:fixed;z-index:90;pointer-events:none}
+@media (max-width:900px){.rail{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv,.js .steps .step,.hero [data-in]{opacity:1!important;transform:none!important}
+  .fig .ln,.fig .ln2{stroke-dashoffset:0}.fig .dot,.fig .lbl{opacity:1;transform:none}
+  .steps::after{transform:none}.step__dot::after{transform:scale(1)}
+}
+/* ===== site ===== */
+/* heading H4: JA heading + mono sub below */
+.sh{display:flex;flex-direction:column;gap:8px}
+.sh__ja{order:1}
+.sh__en{order:2;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:lowercase}
+.sh__en::before{content:"// "}
+.sh__sub{order:3}
+/* hero E */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:var(--deep)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:blur(1.4px) saturate(.75)}
+.hero__veil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,20,26,.65) 0%,rgba(8,20,26,.25) 30%,rgba(8,20,26,.3) 60%,rgba(8,20,26,.94) 100%),linear-gradient(90deg,rgba(8,20,26,.7),transparent 60%)}
+.hero__in{position:relative;z-index:2;min-height:100vh;min-height:100svh;width:min(1180px,calc(100% - 48px));margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;padding:calc(var(--header-h) + 50px) 0 80px}
+.hero__title{grid-column:2;grid-row:1 / span 2;writing-mode:vertical-rl;font-family:var(--serif);font-weight:500;font-size:clamp(36px,4.4vw,60px);letter-spacing:.2em;line-height:1.55;margin-right:clamp(0px,7vw,104px)}
+.hero__title span{display:block}
+.hero__title span+span{padding-top:2.8em}
+.hero__low{grid-column:1;grid-row:2;align-self:end;max-width:31em}
+.hero__en{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px}
+.hero__lead{font-size:15px;line-height:2.05}
+.hero__rows{margin-top:22px;border-top:1px solid var(--line);font-size:13.5px}
+.hero__rows a{display:grid;grid-template-columns:4.5em minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:background .3s,padding .3s}
+.hero__rows a:hover{background:rgba(91,200,220,.08);padding-left:8px}
+.hero__rows span{font-family:var(--mono);color:var(--accent);font-size:12px}
+@media (max-width:900px){
+  .hero__in{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-content:end;gap:24px}
+  .hero__title{grid-column:1;grid-row:1;writing-mode:horizontal-tb;font-size:clamp(28px,8vw,38px);letter-spacing:.1em;margin:0}
+  .hero__title span+span{padding-top:0;padding-left:1em}
+}
+.concept .fig{max-width:460px;margin:0 auto}
+.biz__media .ph{aspect-ratio:16/10}
+.biz__media{position:relative}
+.biz__media::before{content:attr(data-path);position:absolute;left:0;top:-26px;font-family:var(--mono);font-size:11.5px;color:var(--mute);letter-spacing:.04em}
+.biz .tags li{border-radius:3px;font-family:var(--sans)}
+.biz__label{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em;margin-bottom:10px}
+.prin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line)}
+.prin article{padding:30px 26px;border-right:1px solid var(--line)}
+.prin article:last-child{border-right:0}
+.prin code{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:14px}
+.prin h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.14em;margin-bottom:10px}
+.prin p{font-size:14.5px;color:var(--mute)}
+@media (max-width:900px){.prin{grid-template-columns:minmax(0,1fr)}.prin article{border-right:0;border-bottom:1px solid var(--line)}.prin article:last-child{border-bottom:0}}
+.steps{grid-template-columns:repeat(5,minmax(0,1fr))}
+.steps.is-in .step:nth-child(5) .step__dot::after{transition-delay:2.4s}
+.js .steps.is-in .step:nth-child(5){transition-delay:1.6s}
+@media (max-width:900px){.steps{grid-template-columns:minmax(0,1fr)}}
+.sec--paper .step__dot{--step-bg:var(--paper)}
+:root{--dot-r:2px}
+/* rail: table rows + cursor */
+.rail{right:22px;top:50%;transform:translateY(-50%);height:54vh;width:34px}
+.rail__rows{position:absolute;inset:0;background:repeating-linear-gradient(var(--line) 0 1px,transparent 1px 14px)}
+.rail__cur{position:absolute;left:0;right:0;top:0;height:10px;margin-top:-5px;background:var(--accent);opacity:.85;box-shadow:0 0 12px rgba(91,200,220,.6)}
+.rail__read{position:absolute;right:40px;top:0;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="header" id="header">
+  <div class="header__in">
+    <!-- 【確認事項】ロゴマーク（行とカーソルの図形）は仮です -->
+    <a class="logo" href="#top" aria-label="合同会社 Namiki Trading トップへ">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="2" fill="none" stroke="#E7F0F2" stroke-width="1.2"/><path d="M7 10h18M7 22h18" stroke="#8FA4AA" stroke-width="1"/><rect x="7" y="14" width="18" height="4" fill="#5BC8DC"/></svg>
+      <span class="logo__name"><b style="font-family:var(--latin);font-weight:500;letter-spacing:.08em">Namiki Trading</b><small>IT・DX SYSTEM DEVELOPMENT</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-controls="gnav" aria-expanded="false" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    <nav class="gnav" id="gnav" aria-label="メインメニュー"><ul><li><a href="#about">私たちについて</a></li><li><a href="#business">事業内容</a></li><li><a href="#principles">大切にしていること</a></li><li><a href="#flow">開発の進め方</a></li><li><a href="#message">代表メッセージ</a></li><li><a href="#company">会社概要</a></li></ul></nav>
+  </div>
+</header>
+
+<div class="rail" id="rail" aria-hidden="true">
+  <div class="rail__rows"></div>
+  <span class="rail__cur" id="railCur"></span>
+  <span class="rail__read" id="railRead">ROW 001</span>
+</div>
+
+<main id="main">
+<section class="hero" id="top" aria-label="メインビジュアル">
+    <!-- 画像：Unsplash（仮）1461749280684-dccba630e2f6（コードが表示されたモニター）をCanvasで一行ずつ描き出しています。差し替え推奨 -->
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero__veil" aria-hidden="true"></div>
+    <div class="hero__in">
+      <!-- 【確認事項】キャッチコピーは案です -->
+      <h1 class="hero__title"><span data-in="1">使いやすさを、</span><span data-in="2">正確さの上に。</span></h1>
+      <div class="hero__low">
+        <p class="hero__en" data-in="3">IT・DX SYSTEM DEVELOPMENT</p>
+        <p class="hero__lead" data-in="3">ECショッピングサイトや家電販売店のWEBシステム、そして証券会社向けの口座管理・株式売買を支えるWEBシステム。毎日の買い物と資産運用の両方に関わる、IT・DXシステム開発の会社です。</p>
+        <nav class="hero__rows" data-in="4" aria-label="事業"><a href="#commerce"><span>01 /</span>EC・家電ショップ向けWEBシステム開発</a><a href="#securities"><span>02 /</span>証券口座・株式取引システム開発</a></nav>
+      </div>
+    </div>
+    <div class="cue" aria-hidden="true">scroll<i></i></div>
+  </section>
+
+  <section class="sec" id="about" data-rail aria-labelledby="about-h">
+    <div class="wrap concept">
+      <div>
+        <div class="sh rv"><p class="sh__en" aria-hidden="true">about us</p><h2 class="sh__ja" id="about-h">身近な買い物から、<br>大切な資産運用まで。</h2></div>
+        <!-- 【確認事項】以下の文章は事業内容をもとにした案です。社名からの着想は使っていません -->
+        <div class="prose rv">
+          <p>合同会社Namiki Tradingは、IT・DXシステムの開発を行う会社です。</p>
+          <p>ECショッピングサイトや家電販売店のWEBシステムは、多くの人の毎日の買い物につながっています。証券会社の口座管理や株式売買を支えるシステムは、投資に関わる多くの人の資産運用につながっています。</p>
+          <p>どちらも、システムの中では一行一行のデータです。その一行を正しく通すことが、使う人の暮らしにまっすぐ届く。だから私たちは、便利で使いやすいこと、そして正確であることを、何よりも大切に開発に向き合います。</p>
+        </div>
+      </div>
+      <div class="rv"><svg class="fig" viewBox="0 0 440 340" role="img" aria-label="EC・家電ショップ向けと証券向け、ふたつのシステムが「正確さ」という共通の土台の上に立つ図">
+  <path class="ln" pathLength="1" d="M30 290 H410"/>
+  <path class="ln" pathLength="1" d="M60 270 V120 H200 V270"/>
+  <path class="ln" pathLength="1" d="M240 270 V80 H380 V270"/>
+  <path class="ln2" pathLength="1" d="M76 150 H184 M76 180 H184 M76 210 H184 M76 240 H160"/>
+  <path class="ln2" pathLength="1" d="M256 110 H364 M256 140 H364 M256 170 H364 M256 200 H364 M256 230 H340"/>
+  <rect class="dot" x="72" y="172" width="116" height="14" fill="#5BC8DC" opacity=".8"/>
+  <rect class="dot" x="252" y="162" width="116" height="14" fill="#5BC8DC" opacity=".8"/>
+  <text class="lbl" x="66" y="104">EC・家電ショップ</text>
+  <text class="lbl" x="252" y="64">証券口座・株式取引</text>
+  <text class="lbl" x="164" y="320">正確さという土台</text>
+</svg></div>
+    </div>
+  </section>
+
+  <!-- 画像：Unsplash（仮）店頭のタブレット。差し替え推奨 -->
+  <div class="band" aria-hidden="true">
+    <div class="ph"><img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=2000&q=72" alt="" loading="lazy" onerror="this.parentNode.classList.add('is-fallback');this.remove()"></div>
+    <div class="band__cap wrap"><p>画面の向こうに、<br>いつも使う人がいる。</p></div>
+  </div>
+
+  <section class="sec sec--alt" id="business" data-rail aria-labelledby="biz-h">
+    <div class="wrap">
+      <div class="sh rv"><p class="sh__en" aria-hidden="true">business</p><h2 class="sh__ja" id="biz-h">事業内容</h2><p class="sh__sub">IT・DXシステム開発業</p></div>
+      <div id="commerce"><article class="biz">
+        <div class="biz__media rv" data-path="ec / electronics-retail"><div class="ph"><img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=72" alt="床に置かれたショッピングカート" loading="lazy" onerror="this.parentNode.classList.add('is-fallback');this.remove()"></div></div>
+        <div class="rv">
+          <p class="biz__label">01 / COMMERCE</p>
+          <p class="biz__kind">EC・家電ショップ向けWEBシステム開発</p>
+          <h3>便利で使いやすい、<br>買い物体験をつくる。</h3>
+          <p>ECショッピングサイトや家電販売店のWEB関連システムを開発し、商品情報の掲載やオンラインでの販売、店舗サービスの発信をサポートします。便利で使いやすい買い物体験をつくる、身近なWEBサービスに関わる事業です。</p>
+          <ul class="tags"><li>商品情報の掲載</li><li>オンラインでの販売</li><li>店舗サービスの発信</li><li>使いやすい買い物体験</li></ul>
+        </div>
+      </article></div>
+      <!-- 【確認事項】証券向けはシステム開発の受託としての記載です。金融商品の取引・勧誘と受け取られない表現かご確認ください -->
+      <div id="securities" style="margin-top:clamp(72px,10vw,128px)"><article class="biz">
+        <div class="biz__media rv" data-path="securities / accounts-trading"><div class="ph"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=72" alt="画面に表示された株価のチャート" loading="lazy" onerror="this.parentNode.classList.add('is-fallback');this.remove()"></div></div>
+        <div class="rv">
+          <p class="biz__label">02 / SECURITIES</p>
+          <p class="biz__kind">証券口座・株式取引システム開発</p>
+          <h3>正確で使いやすい、<br>取引環境をつくる。</h3>
+          <p>証券会社向けに、顧客口座の管理や株式の売買を支えるWEBシステムを開発します。正確で使いやすい取引環境をつくり、投資に関わる多くの人の資産運用を支える重要なシステムを提供します。</p>
+          <ul class="tags"><li>顧客口座の管理</li><li>株式の売買を支える仕組み</li><li>正確な取引環境</li><li>使いやすい画面</li></ul>
+        </div>
+      </article></div>
+    </div>
+  </section>
+
+  <section class="sec" id="principles" data-rail aria-labelledby="prin-h">
+    <div class="wrap">
+      <div class="sh rv"><p class="sh__en" aria-hidden="true">principles</p><h2 class="sh__ja" id="prin-h">開発で大切にしていること</h2><p class="sh__sub">買い物も、資産運用も、使う人にとって大切な時間です。</p></div>
+      <!-- 【確認事項】3つの考え方は、CSVの「便利で使いやすい」「正確で使いやすい」をもとにした案です -->
+      <div class="prin">
+        <article class="rv"><code>01 accurate</code><h3>正確であること</h3><p>口座や取引、商品情報。ひとつの誤りも信頼を損なうからこそ、正確さを土台に置きます。</p></article>
+        <article class="rv"><code>02 usable</code><h3>使いやすいこと</h3><p>はじめての人にも迷わせない。画面の一つひとつを、使う人の目線で設計します。</p></article>
+        <article class="rv"><code>03 sustainable</code><h3>使いつづけられること</h3><p>公開して終わりではなく、日々の運用に耐え、育てていけるシステムを目指します。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--paper" id="flow" data-rail aria-labelledby="flow-h">
+    <div class="wrap">
+      <div class="sh rv"><p class="sh__en" aria-hidden="true">flow</p><h2 class="sh__ja" id="flow-h">開発の進め方</h2></div>
+      <!-- 【確認事項】一般的な開発の流れをもとにした案です。実際の進め方に合わせてください（順序のある工程のため番号を使用） -->
+      <ol class="steps"><li class="step"><span class="step__dot" aria-hidden="true"></span><span class="step__no">01</span><h3>ヒアリング</h3><p>課題や実現したいことをうかがいます。</p></li><li class="step"><span class="step__dot" aria-hidden="true"></span><span class="step__no">02</span><h3>要件定義</h3><p>必要な機能と範囲を整理します。</p></li><li class="step"><span class="step__dot" aria-hidden="true"></span><span class="step__no">03</span><h3>設計</h3><p>使いやすさと正確さを両立する設計を考えます。</p></li><li class="step"><span class="step__dot" aria-hidden="true"></span><span class="step__no">04</span><h3>開発・テスト</h3><p>開発し、動きを丁寧に確かめます。</p></li><li class="step"><span class="step__dot" aria-hidden="true"></span><span class="step__no">05</span><h3>公開・運用</h3><p>公開後も、安定した運用を支えます。</p></li></ol>
+    </div>
+  </section>
+
+  <section class="sec sec--deep" id="message" data-rail aria-labelledby="msg-h">
+    <div class="wrap">
+      <div class="sh rv"><p class="sh__en" aria-hidden="true">message</p><h2 class="sh__ja" id="msg-h">代表メッセージ</h2></div>
+      <!-- 【確認事項】代表メッセージは草案です。ご本人の確認・修正を経て公開してください -->
+      <div class="msg rv">
+      <h3 class="msg__title">一行を、<br>正しく通す。</h3>
+      <div class="msg__body"><p class="first">私たちがつくるシステムの向こうには、いつも使う人がいます。</p><p>欲しい商品を探す人。店舗のサービスを知りたい人。大切な資産を託し、売買の画面に向き合う人。どの画面も、その人にとっては大切な時間の一部です。</p><p>だから、使いやすいことと、正確であることを両立させたい。商品情報の一行も、取引の一行も、正しく通すことが信頼の土台だと考えています。</p><p>公開して終わりではなく、日々の運用まで。長く使いつづけられるシステムを、誠実におつくりします。</p>
+        <!-- 【確認事項】署名は会社名と役職のみの仮置きです。氏名を入れる場合はご本人の確認後に追記してください -->
+        <p class="msg__sign"><small>代表社員</small>並木一樹</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="sec" id="company" data-rail aria-labelledby="company-h">
+    <div class="wrap company">
+      <div class="sh rv"><p class="sh__en" aria-hidden="true">company</p><h2 class="sh__ja" id="company-h">会社概要</h2></div>
+      <dl class="profile rv">
+  <div><dt>商号</dt><dd>合同会社Namiki Trading</dd></div>
+  <!-- 【確認事項】代表者の役職名（代表社員など）をご確認ください -->
+  <div><dt>代表者</dt><dd>代表社員　並木一樹</dd></div>
+  <!-- 【確認事項】所在地はCSVの記載（都道府県なし）のままです -->
+  <div><dt>所在地</dt><dd>〒142-0062　東京都品川区小山3丁目2番16号</dd></div>
+  <div><dt>事業内容</dt><dd><ul><li>IT・DXシステム開発業</li><li>EC・家電ショップ向けWEBシステム開発事業</li><li>証券口座・株式取引システム開発事業</li></ul></dd></div>
+  <!-- 【確認事項】設立・資本金・従業員数はCSVにないため未掲載です。判明したら下の行を有効にしてください -->
+  <!-- <div><dt>設立</dt><dd>----年--月</dd></div> -->
+  <!-- <div><dt>資本金</dt><dd>---万円</dd></div> -->
+  <!-- <div><dt>従業員数</dt><dd>--名</dd></div> -->
+</dl>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__in">
+      <div>
+        <a class="logo" href="#top" aria-label="合同会社 Namiki Trading トップへ"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="2" fill="none" stroke="#E7F0F2" stroke-width="1.2"/><path d="M7 10h18M7 22h18" stroke="#8FA4AA" stroke-width="1"/><rect x="7" y="14" width="18" height="4" fill="#5BC8DC"/></svg><span class="logo__name"><b style="font-family:var(--latin);font-weight:500;letter-spacing:.08em">Namiki Trading</b><small>IT・DX SYSTEM DEVELOPMENT</small></span></a>
+        <p class="footer__tag">使いやすさを、正確さの上に。</p>
+      </div>
+      <nav aria-label="フッターメニュー"><ul><li><a href="#about">私たちについて</a></li><li><a href="#business">事業内容</a></li><li><a href="#principles">大切にしていること</a></li><li><a href="#flow">開発の進め方</a></li><li><a href="#message">代表メッセージ</a></li><li><a href="#company">会社概要</a></li></ul></nav>
+    </div>
+    <p class="copy">&copy; <span id="year">2026</span> 合同会社Namiki Trading</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,r){ return (r||document).querySelector(s); }
+  function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+  function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+  function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+  function rgba(c,a){ return 'rgba(' + c + ',' + a + ')'; }
+  var cv = document.getElementById('heroCanvas');
+  var ctx = (cv && cv.getContext) ? cv.getContext('2d') : null;
+  var W = 0, H = 0, dpr = 1;
+  /* ===== site ===== */
+
+  /* hero (photo-driven): the code photo is committed row by row; a check cursor runs the rows */
+  var C_A = '91,200,220', C_T = '231,240,242';
+  var HERO_STILL = 40;
+  var photo = new Image(), photoOK = false;
+  photo.crossOrigin = 'anonymous';
+  photo.onload = function(){ photoOK = true; heroStill(); };
+  photo.src = 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1800&q=70';
+  var rowsA = [], rh = 8, total = 0;
+  function rnd(i){ var x = Math.sin(i*91.7 + 1.3)*43758.5453; return x - Math.floor(x); }
+  function heroBuild(){
+    rh = W < 760 ? 7 : 9; rowsA = [];
+    var n = Math.ceil(H / rh);
+    for (var i = 0; i < n; i++) rowsA.push({ y: i*rh, off: (rnd(i) - .5) * W * .5, d: .2 + i * (2.4 / n) + rnd(i+7)*.25 });
+    total = 3.2;
+  }
+  function cover(){ var iw = photo.naturalWidth, ih = photo.naturalHeight, s = Math.max(W/iw, H/ih); return {s:s, ox:(W - iw*s)/2, oy:(H - ih*s)/2}; }
+  function heroDraw(t){
+    ctx.fillStyle = '#08141A'; ctx.fillRect(0, 0, W, H);
+    var c = photoOK ? cover() : null;
+    rowsA.forEach(function(r){
+      var k = clamp((t - r.d) / .5, 0, 1); if (k <= 0) return;
+      var e = easeOut(k), dx = r.off * (1 - e);
+      ctx.globalAlpha = .25 + .75*e;
+      if (c){
+        ctx.drawImage(photo, (0 - c.ox)/c.s, (r.y - c.oy)/c.s, W/c.s, rh/c.s, dx, r.y, W, rh - 1);
+      } else {
+        ctx.fillStyle = rgba(C_T, .05); ctx.fillRect(dx + W*.1, r.y + 2, W*.5*rnd(r.y), rh - 4);
+      }
+      ctx.globalAlpha = 1;
+      if (k < 1){ ctx.fillStyle = rgba(C_A, .35*(1 - k)); ctx.fillRect(0, r.y, W, rh - 1); }
+    });
+    ctx.fillStyle = 'rgba(8,20,26,.42)'; ctx.fillRect(0, 0, W, H);
+    // check cursor
+    var s = clamp((t - total) / .8, 0, 1);
+    if (s > 0){
+      var y = ((t - total) * 26) % H; if (t >= HERO_STILL - 1) y = H * .58;
+      y = Math.floor(y / rh) * rh;
+      ctx.fillStyle = rgba(C_A, .16*s); ctx.fillRect(0, y, W, rh);
+      ctx.fillStyle = rgba(C_A, .9*s); ctx.fillRect(0, y, 3, rh);
+      // committed marks on rows above the cursor (right edge)
+      for (var yy = (y % (rh*6)); yy < y; yy += rh*6){ ctx.fillStyle = rgba(C_A, .35*s); ctx.fillRect(W - 14, yy + 2, 6, rh - 4); }
+    }
+  }
+
+  /* rail: a cursor moves down table rows; row number readout */
+  var railCur = document.getElementById('railCur'), railRead = document.getElementById('railRead'), railEl = document.getElementById('rail');
+  function railUpdate(p){
+    var h = railEl.clientHeight, rows = Math.max(1, Math.floor(h / 14)), r = Math.min(rows - 1, Math.floor(p * rows));
+    railCur.style.top = (r * 14 + 7.5) + 'px';
+    railRead.style.top = (r * 14 + 7.5) + 'px';
+    railRead.textContent = 'ROW ' + String(Math.round(p * 120) + 1).padStart(3, '0');
+  }
+
+  /* ---- hero canvas boilerplate ---- */
+  var running = false, visible = true, raf = 0, t0 = performance.now();
+  function resize(){
+    if (!ctx) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    heroBuild();
+  }
+  function loop(now){ if (!running) return; heroDraw((now - t0) / 1000); raf = requestAnimationFrame(loop); }
+  function start(){ if (!ctx || running || reduce || !visible || document.hidden) return; running = true; raf = requestAnimationFrame(loop); }
+  function stop(){ running = false; cancelAnimationFrame(raf); }
+  function heroStill(){ if (ctx && !running) heroDraw(HERO_STILL); }
+  if (ctx){
+    resize();
+    if (reduce) heroStill(); else start();
+    var rt, lastW = W;
+    addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){
+      var w = cv.clientWidth; if (w === lastW && !reduce && running) { lastW = w; return; }
+      lastW = w; resize(); if (!running) heroStill(); }, 150); });
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){ visible = en[0].isIntersecting; visible ? start() : stop(); }).observe(cv.parentElement);
+    }
+    document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : start(); });
+  }
+
+  /* ---- header + rail (rAF throttled) ---- */
+  var header = document.getElementById('header'), ticking = false;
+  var railSecs = $$('[data-rail]');
+  function progress(){ var max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? clamp(scrollY / max, 0, 1) : 0; }
+  function onScroll(){
+    header.classList.toggle('is-scrolled', scrollY > 40);
+    if (typeof railUpdate === 'function') railUpdate(progress());
+    bandParallax();
+    ticking = false;
+  }
+  addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  addEventListener('resize', function(){ if (typeof railLayout === 'function') railLayout(); onScroll(); });
+  addEventListener('load', function(){ if (typeof railLayout === 'function') railLayout(); onScroll(); });
+  function secProgress(){
+    var max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    return railSecs.map(function(s){ return clamp((s.getBoundingClientRect().top + scrollY) / max, 0, 1); });
+  }
+
+  /* ---- band parallax ---- */
+  var bands = $$('.band .ph img');
+  function bandParallax(){
+    if (reduce) return;
+    bands.forEach(function(im){
+      var r = im.parentElement.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      var k = (r.top + r.height/2 - innerHeight/2) / innerHeight;
+      im.style.transform = 'translateY(' + (k * -40).toFixed(1) + 'px)';
+    });
+  }
+
+  /* ---- menu ---- */
+  var btn = document.getElementById('menuBtn'), nav = document.getElementById('gnav');
+  function setMenu(open){
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    nav.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open){ var f = nav.querySelector('a'); if (f) f.focus(); }
+  }
+  btn.addEventListener('click', function(){ setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a') && nav.classList.contains('is-open')) setMenu(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && nav.classList.contains('is-open')){ setMenu(false); btn.focus(); } });
+  matchMedia('(min-width:901px)').addEventListener('change', function(m){ if (m.matches) setMenu(false); });
+
+  /* ---- reveal: one-shot ---- */
+  var targets = $$('.rv, .fig, .steps, [data-reveal]');
+  function reveal(el){ el.classList.add('is-in'); if (typeof onReveal === 'function') onReveal(el); }
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (!en.isIntersecting) return; reveal(en.target); io.unobserve(en.target); });
+    }, {threshold:.18, rootMargin:'0px 0px -6% 0px'});
+    targets.forEach(function(t){ io.observe(t); });
+  } else {
+    targets.forEach(reveal);
+  }
+
+  /* ---- misc ---- */
+  var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+  if (typeof siteInit === 'function') siteInit();
+  if (typeof railLayout === 'function') railLayout();
+  onScroll();
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.body.classList.add('is-loaded'); }); });
+})();
+</script>
+</body>
+</html>
